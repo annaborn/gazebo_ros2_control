@@ -200,7 +200,12 @@ void GazeboSystem::registerJoints(
         "Joint '" << joint_name << "'is mimicking joint '" << mimicked_joint <<
           "' with mutiplier: " << mimic_joint.multiplier);
       this->dataPtr->mimic_joints_.push_back(mimic_joint);
-      suffix = "_mimic";
+
+      // see the issue: https://github.com/ros-controls/gazebo_ros2_control/issues/173
+      // how it was fixed for robotiq:
+      // https://github.com/pal-robotics/pal_robotiq_gripper/commit/36f4f494dbe710082ed0e2e74d81ba895a819341#diff-5439e52f9580fca9132f35117896411dc72f25a9e84bdecc77358fde4ae31c80R21
+      //suffix = "_mimic";
+      suffix = "";
     }
 
     RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\tState:");
